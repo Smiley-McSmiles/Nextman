@@ -1,75 +1,66 @@
-> LLaMan v0.2.0 - An Ollama and Open-WebUI manager written in BASH
+> Nextman v0.1.0 - A Nextcloud manager written in BASH
 
-> Tested on Fedora 40/41 | Ubuntu 24.04
+> Tested on Fedora 41 | Ubuntu 24.04
 
 > Should work on Any Debian, Arch, or RHEL Based Distribution **with SystemD**
 
 # Description
 
-LLaMan is a lightweight BASH CLI (Command Line Interface) tool for installing and managing Ollama, Open-WebUI, and OpendAI-Speech.
+Nextman is a lightweight BASH CLI (Command Line Interface) tool for installing and managing Nextcloud (with Apache).
 
 # Getting Started
 
 ```sh
-git clone https://github.com/Smiley-McSmiles/llaman
-cd llaman
+git clone https://github.com/Smiley-McSmiles/Nextman
+cd Nextman
 chmod ug+x setup.sh
 sudo ./setup.sh
-# sudo ./setup.sh -I /path/to/llaman-backup.tar
+# sudo ./setup.sh -I /path/to/Nextman-backup.tar
 cd ~/
 ```
 
 # Features
 
-* **Setup** - Install Ollama, Open-WebUI, and OpendAI-Speech at once
+* **Setup** - Install Nextcloud, Apache, and php-fpm at once
 * **Update** - Downloads and updates to the latest Ollama, Open-WebUI, OpendAI-Speech versions
-* **Disable** - Disable Ollama, Open-WebUI, and Opend-Speech
-* **Enable** - Enable Ollama, Open-WebUI, and Opend-Speech
-* **Start** - Start Ollama, Open-WebUI, and Opend-Speech
-* **Stop** - Stop Ollama, Open-WebUI, and Opend-Speech
-* **Restart** - Restart Ollama, Open-WebUI, and Opend-Speech
-* **Status** - Get status of Ollama, Open-WebUI, and Opend-Speech
-* **Download** - Download a .gguf file from Hugging Face via URL
-* **Remove** - Remove a model from Ollama
-* **Remove GGUF** - Remove a downloaded .gguf model
-* **Install** - Install a downloaded .gguf model
-* **Change Port** - Change the default port for Open-WebUI or OpendAI-Speech
+* **Disable** - Disable Nextcloud, Apache, and php-fpm
+* **Enable** - Enable Nextcloud, Apache, and php-fpm
+* **Start** - Start Nextcloud, Apache, and php-fpm
+* **Stop** - Stop Nextcloud, Apache, and php-fpm
+* **Restart** - Restart Nextcloud, Apache, and php-fpm
+* **Status** - Get status of Nextcloud, Apache, and php-fpm
+* **Change Port** - Change the default port for Nextcloud
 * **Backup** - Input a directroy to output a backup archive
 * **Backup Utility** - Start the Backup Utility to set up automatic backups
 * **Import** - Import a .tar file to pick up where you left off on another system
-  - _Use `sudo ./setup.sh /path/to/llaman-backup.tar` to import/restore a backup_
-* **Get Version** - Get the current installed version of LLaMan, Ollama, and Open-WebUI
+  - _Use `sudo ./setup.sh /path/to/nextman-backup.tar` to import/restore a backup_
+* **Get Version** - Get the current installed version of Nextman and Nextcloud
 * **View Logs** - Select from a list of logs to view
-* **Uninstall** - Uninstalls LLaMan, Ollama, Open-WebUI, and Opend-AI-Speech completely
+* **Uninstall** - Uninstalls Nextman and Nextcloud completely
 
 # Usage
 ```
-llaman [PARAMETER]
+nextman [PARAMETER]
 
 PARAMETERS:
--b,    --backup             Backup Open-WebUI users and settings
+-b,    --backup             Backup Nextcloud
 -bu,   --backup-utility     Start the backup utility
--i,    --import             Import Open-WebUI archive
--e,    --enable             Enable Ollama and Open-WebUI
--d,    --disable            Disable Ollama and Open-WebUI
--s,    --start              Start Ollama and Open-WebUI
--S,    --stop               Stop Ollama and Open-WebUI
--r,    --restart            Restart Ollama and Open-WebUI
+-i,    --import             Import Nextman archive
+-e,    --enable             Enable Nextcloud, Apache, and php-fpm
+-d,    --disable            Disable Nextcloud, Apache, and php-fpm
+-s,    --start              Start Nextcloud, Apache, and php-fpm
+-S,    --stop               Stop Nextcloud, Apache, and php-fpm
+-r,    --restart            Restart Nextcloud, Apache, and php-fpm
 -t,    --status             Get status of ollama.service and open-webui.service.
--I,    --install            Install a downloaded .gguf model
--R,    --remove             Remove model from Ollama
--rg,   --remove-gguf        Remove downloaded .gguf model
--D,    --download           Download .gguf file from https://huggingface.co
--u,    --update             Update Ollama and Open-Webui
--cp,   --change-port        Change the Open-WebUI port
--cps,  --change-port-speech ChangeSpeechPort
--v,    --version            Get LLaMan, Ollama, and Open-Webui version
--vl,   --view-logs          View LLaMan logs
+-u,    --update             Update Nextcloud, Apache, and php-fpm
+-cp,   --change-port        Change the Nextcloud port
+-v,    --version            Get Nextman and Nextcloud versions
+-vl,   --view-logs          View Nextman logs
 -h,    --help               Display this help menu
--X,    --uninstall          Uninstall LLaMan, Ollama, and Open-Webui
-Example: sudo llaman -e
+-X,    --uninstall          Uninstall Nextman, Ollama, and Open-Webui
+Example: sudo Nextman -e -s -t
 ```
 
 ### License
-   This project is licensed under the [GPL V3.0 License](https://github.com/Smiley-McSmiles/llaman/blob/main/LICENSE).
+   This project is licensed under the [GPL V3.0 License](https://github.com/Smiley-McSmiles/Nextman/blob/main/LICENSE).
 
