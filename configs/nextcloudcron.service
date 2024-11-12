@@ -1,0 +1,10 @@
+[Unit]
+Description=Nextcloud cron.php job
+
+[Service]
+User=apache
+ExecCondition=php -f /var/www/html/nextcloud/occ status -e
+ExecStart=/usr/bin/php -f /var/www/html/nextcloud/cron.php
+KillMode=process
+[Install]
+WantedBy=multi-user.target
