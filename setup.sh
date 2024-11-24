@@ -16,6 +16,7 @@ nextcloudLatestArchive="https://download.nextcloud.com/server/releases/latest.zi
 apacheNcConf="configs/nextcloud.conf"
 nextcloudCronService="configs/nextcloudcron.service"
 nextcloudCronTimer="configs/nextcloudcron.timer"
+serviceLocation=""
 nextcloudUpdate="scripts/nextcloud-update.sh"
 scanFiles="scripts/scanFiles.sh"
 hasSELinux=false
@@ -143,7 +144,7 @@ ConfigureFirewall() {
 	SetVar defaultPort "$defaultPort" "$nextmanConf" bash num
 	SetVar defaultDBPort "$defaultDBPort" "$nextmanConf" bash num
 
-if $hasSELinux; then
+	if $hasSELinux; then
 		semanage fcontext -a -t httpd_sys_rw_content_t '$defaultDir/config(/.*)?'
 		semanage fcontext -a -t httpd_sys_rw_content_t '$defaultDir/apps(/.*)?'
 		semanage fcontext -a -t httpd_sys_rw_content_t '$defaultDir/.htaccess'
@@ -165,6 +166,9 @@ ConfigurePHP() {
 	# Detect PHP-FPM configuration directory based on distribution
 	phpIni=$(find /etc/ -name "php.ini" -type f)
 	phpFpmConf=$(find /etc/ -name "www.conf" -type f)
+
+	# Need to fix $phpIni, it can return multiple lines ******************
+
 	SetVar phpIni "$phpIni" "$nextmanConf" bash string
 	SetVar phpFpmConf "$phpFpmConf" "$nextmanConf" bash string
 	Log "SETUP | phpIni = $phpIni" $logFile
@@ -217,7 +221,16 @@ Setup()
 
 	# Install Nextman
 	mkdir -p "$nextmanDir"
-	cp -f "$nextcloudCronService" "$nextcloudCronTimer" /usr/lib/systemd/system/nextcloudcron.service
+	if [ -d /usr/lib/systemd/system ]; then
+		serviceLocation="/usr/lib/systemd/system"
+		SetVar serviceLocation $serviceLocation "$nextmanConf" str
+		cp -f "$nextcloudCronService" "$nextcloudCronTimer" $serviceLocation/
+	else
+		serviceLocation="/etc/systemd/system"
+		SetVar serviceLocation $serviceLocation "$nextmanConf" str
+		cp -f "$nextcloudCronService" "$nextcloudCronTimer" $serviceLocation/
+	fi
+	Log "IMPORT | SetVar serviceLocation=$serviceLocation" $logFile
 	SetVar mariadbUser "$mariadbUser" "$nextmanConf" bash string
 	SetVar mariadbPass "$mariadbPass" "$nextmanConf" bash string
 	SetVar ncAdmin "$ncAdmin" "$nextmanConf" bash string
